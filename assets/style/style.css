@@ -30,6 +30,7 @@ main section{
 .img-card {
     height: 25vh;
     object-fit: cover;
+    padding: 5px;
 }
 footer img{
     padding-left: 15px;
@@ -97,11 +98,16 @@ footer p {
     background-color:rgb(203, 14, 128) ;
 }
 .car-he {
-    height: 395px;
+    height: 350px;
 }
 .bod-card{
     padding: 5px;
 }
+.columnasjs{
+    display: flex;
+    flex-direction: row-reverse;
+}
+
 
 @media (min-width: 374px) and (max-width:542px) {
     .na1 {
@@ -114,3 +120,4 @@ footer p {
         height: 700px;
     }
 }
+
