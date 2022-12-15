@@ -107,7 +107,13 @@ footer p {
     display: flex;
     flex-direction: row-reverse;
 }
-
+.chec-1{
+  display:flex;
+  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-evenly;
+  flex-wrap: wrap-reverse;
+}
 
 @media (min-width: 374px) and (max-width:542px) {
     .na1 {

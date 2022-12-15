@@ -1,31 +1,35 @@
-let contenedor = document.getElementById("contenedor")
-    let contador = 0;
-    let contadorDefila = 0;
-    
-for(let event of data.events){
-    if(contador === 0){
+import { cardsDinamicas, categoriaDinamicas,filtroPorCategoria,filtrarBusqueda } from './module/funciones.js'
 
-        contenedor.innerHTML += `<div id="fila${contadorDefila}"></div>`
-    }
-    let pedasitoDeFila = document.getElementById(`fila${contadorDefila}`)
-    pedasitoDeFila.innerHTML += `<div class="p-1">
-    <div class="card car-he" style="width: 18rem;">
-        <img src="${event.image}" class="card-img-top img-card" alt="comida">
-        <div class="card-body">
-            <h6 class="card-title">"${event.name}"</h6>
-            <p class="card-text">"${event.description}"</p>
-            <div class="d-flex justify-content-between">
-            <div><p><strong>$${event.price}</strong></p></div>
-            <div><button><a class="bu" href="./details.html" class="btn btn-primary">Details</a></button></div>
-        </div>
-        </div>
-        </div>
-        </div>`;
-    
-    if(contador === 4){
-        contadorDefila ++
-    contador = 0
-    }else{
-        contador++
-    }
-    }
+let contenedorDeCards = document.getElementById("contenedorDeCards")
+let contenedorCheckss = document.getElementById("contenedorCheckss")
+let contenedorPadre = document.getElementById("contenedorPadre")
+let contenedorBusqueda = document.getElementById("busqueda")
+
+let evento= data.events
+
+let categoriasNoRepetidas= Array.from(new Set(evento.map(elemento => elemento.category)))
+
+cardsDinamicas(evento, contenedorDeCards)
+categoriaDinamicas(categoriasNoRepetidas, contenedorCheckss)
+
+contenedorPadre.addEventListener('change', (e) =>{
+    let checkbox= 
+    document.querySelectorAll('input[type="checkbox"]:checked')
+    let categoriaSeleccionada = Array.from(checkbox).map(elemento => elemento.value)
+    let filtrado=  filtroPorCategoria(evento,categoriaSeleccionada)
+    cardsDinamicas(filtrado, contenedorDeCards)
+
+    contenedorBusqueda.addEventListener('input', (e) =>{
+        let filtradoBusqueda=  filtrarBusqueda(filtrado,contenedorBusqueda.value)
+        cardsDinamicas(filtradoBusqueda, contenedorDeCards)
+        console.log(filtradoBusqueda);
+    })
+})
+
+
+
+
+
+
+
+
