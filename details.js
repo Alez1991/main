@@ -1,7 +1,6 @@
 const info = data.events
 const  queryString = location.search
 const params = new URLSearchParams(queryString)
-console.log(params);
 const id = params.get("id")
 const profile = info.find(card => card._id == id)
 
