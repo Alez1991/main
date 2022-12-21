@@ -1,8 +1,12 @@
-const info = data.events
+fetch( 'https://amazing-events.onrender.com/api/events' )
+        .then( res => res.json())
+        .then(eventos=>{ 
+            let evento = eventos.events
+            
 const  queryString = location.search
 const params = new URLSearchParams(queryString)
 const id = params.get("id")
-const profile = info.find(card => card._id == id)
+const profile = evento.find(card => card._id == id)
 
 let container= document.getElementById("contenedorDetails")
 
@@ -21,4 +25,4 @@ let container= document.getElementById("contenedorDetails")
       </div>
     </div>
   </div>`
-
+        })

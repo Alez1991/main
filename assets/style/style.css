@@ -66,9 +66,6 @@ button {
 .tab table {
     border: 1px solid green;
 }
-.tabe {
-    height: 82vh;
-}
 nav {
     background-color: rgb(87, 175, 87)
 }
@@ -114,6 +111,7 @@ footer p {
   justify-content: space-evenly;
   flex-wrap: wrap-reverse;
 }
+
 
 @media (min-width: 374px) and (max-width:542px) {
     .na1 {

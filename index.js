@@ -5,32 +5,37 @@ let contenedorCheckss = document.getElementById("contenedorCheckss")
 let contenedorPadre = document.getElementById("contenedorPadre")
 let contenedorBusqueda = document.getElementById("busqueda")
 
-let evento= data.events
+fetch( 'https://amazing-events.onrender.com/api/events' )
+        .then( res => res.json())
+        .then(eventos=>{ 
+            let evento = eventos.events
+        
+        let categoriasNoRepetidas= Array.from(new Set(evento.map(elemento => elemento.category)))
 
-let categoriasNoRepetidas= Array.from(new Set(evento.map(elemento => elemento.category)))
+            cardsDinamicas(evento, contenedorDeCards)
+            categoriaDinamicas(categoriasNoRepetidas, contenedorCheckss)
+            
+            function cruseDeFiltros(datos){
+                let checkbox= document.querySelectorAll('input[type="checkbox"]:checked')
+            let categoriaSeleccionada = Array.from(checkbox).map(elemento => elemento.value)
+            let filtrado=  filtroPorCategoria(datos,categoriaSeleccionada)
+            let filtradoBusqueda=  filtrarBusqueda(filtrado,contenedorBusqueda.value)
+            return filtradoBusqueda
+            }
+            
+            contenedorPadre.addEventListener('change', (e) =>{
+                let filtrado= cruseDeFiltros(evento)
+                cardsDinamicas(filtrado, contenedorDeCards)
 
-cardsDinamicas(evento, contenedorDeCards)
-categoriaDinamicas(categoriasNoRepetidas, contenedorCheckss)
+            })
 
-contenedorPadre.addEventListener('change', (e) =>{
-    let filtrado = cruseDeFiltros()
-    cardsDinamicas(filtrado, contenedorDeCards)
-})
+            contenedorBusqueda.addEventListener('input', (e) =>{
+                let filtrado= cruseDeFiltros(evento)
+                cardsDinamicas(filtrado, contenedorDeCards)
 
-contenedorBusqueda.addEventListener('input', (e) =>{
-    let filtradoBusqueda= cruseDeFiltros()
-    cardsDinamicas(filtradoBusqueda, contenedorDeCards)
-})
-
-function cruseDeFiltros(){
-    let checkbox= 
-    document.querySelectorAll('input[type="checkbox"]:checked')
-    let categoriaSeleccionada = Array.from(checkbox).map(elemento => elemento.value)
-    
-    let filtrado=  filtroPorCategoria(evento,categoriaSeleccionada)
-    let filtradoBusqueda=  filtrarBusqueda(filtrado,contenedorBusqueda.value)
-    return filtradoBusqueda
-}
+            })
+        })
+        
 
 
 
